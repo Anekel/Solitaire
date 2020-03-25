@@ -2,3 +2,4 @@
 *.xml
 .idea/$CACHE_FILE$
 .idea/Solitaire.iml
+out/production/Solitaire/logic/Logic.class
