@@ -1,0 +1,4 @@
+
+*.xml
+.idea/$CACHE_FILE$
+.idea/Solitaire.iml
