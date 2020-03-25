@@ -1,5 +1,5 @@
 
 *.xml
-.idea/$CACHE_FILE$
+*.idea
 .idea/Solitaire.iml
-out/production/Solitaire/logic/Logic.class
+out
