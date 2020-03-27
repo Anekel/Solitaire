@@ -4,7 +4,8 @@ import java.util.ArrayList;
 
 public class BuildingTower {
     int faceDown;
-    ArrayList<Card> faceUp = new ArrayList<>();
+    Card head;
+    Card  end;
 
     private Boolean isEmpty() {
         if (faceDown == 0) {

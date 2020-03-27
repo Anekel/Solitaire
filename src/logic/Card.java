@@ -2,6 +2,7 @@ package logic;
 
 public class Card {
     char suit;
-    Boolean color;
+    boolean color;
     int value;
+    Card nextCard;
 }
