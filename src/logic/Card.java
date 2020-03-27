@@ -4,11 +4,13 @@ public class Card {
     private char suit;
     private boolean color; //TODO better naming?
     private int value;
+    Card prevCard;
     Card nextCard;
 
     public Card(char suit, int value){
         setSuit(suit);
         setValue(value);
+        prevCard = null;
         nextCard = null;
     }
 

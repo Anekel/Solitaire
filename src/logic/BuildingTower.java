@@ -5,11 +5,31 @@ import java.util.ArrayList;
 public class BuildingTower {
     private int faceDown;
     private Card head;
-    private Card  end;
+    private Card end;
 
     public BuildingTower(int index, Card head){
         setFaceDown(index);
         setHead(head);
+    }
+
+    public void addCard(Card card){
+        card.prevCard = end;
+        card.prevCard.nextCard = card;
+        setEnd(card);
+    }
+
+    public Card removeCard(Card card){
+        if (card.equals(head)){ //TODO what to do!?!?
+            faceDown--;
+            head = null;
+            end = null;
+        }
+        else {
+            card.prevCard.nextCard = null;
+            setEnd(card.prevCard);
+            card.prevCard = null;
+        }
+        return card;
     }
 
     private Boolean isEmpty() {
@@ -35,11 +55,21 @@ public class BuildingTower {
 
     public void setHead(Card head) {
         this.head = head;
-        if (head.nextCard == null) setEnd(head);
+        setEnd(head);
     }
 
-    public void setEnd(Card end) {
-        this.end = end;
+    public void setEnd(Card card) {
+        if (card.nextCard == null) {
+            this.end = card;
+        }
+        else {
+            // Iterate forward to last card in list
+            Card curr = card;
+            while (curr.nextCard != null) {
+                curr = curr.nextCard;
+            }
+            this.end = curr;
+        }
     }
 }
 
