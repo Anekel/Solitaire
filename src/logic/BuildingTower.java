@@ -1,14 +1,15 @@
 package logic;
 
 import java.util.ArrayList;
+import java.util.Stack;
 
 public class BuildingTower {
-    private int faceDown;
+    private Stack<Card> faceDown;
     private Card head;
     private Card end;
 
-    public BuildingTower(int index, Card head){
-        setFaceDown(index);
+    public BuildingTower(Stack<Card> faceDown, Card head){
+        setFaceDown(faceDown);
         setHead(head);
     }
 
@@ -20,9 +21,7 @@ public class BuildingTower {
 
     public Card removeCard(Card card){
         if (card.equals(head)){ //TODO what to do!?!?
-            faceDown--;
-            head = null;
-            end = null;
+            setHead(faceDown.pop());
         }
         else {
             card.prevCard.nextCard = null;
@@ -33,12 +32,12 @@ public class BuildingTower {
     }
 
     private Boolean isEmpty() {
-        return faceDown == 0 && head == null;
+        return faceDown.isEmpty() && head == null;
     }
 
     // Getters and Setters
     public int getFaceDown() {
-        return faceDown;
+        return faceDown.size();
     }
 
     public Card getHead() {
@@ -49,7 +48,7 @@ public class BuildingTower {
         return end;
     }
 
-    public void setFaceDown(int faceDown) {
+    public void setFaceDown(Stack<Card> faceDown) {
         this.faceDown = faceDown;
     }
 
