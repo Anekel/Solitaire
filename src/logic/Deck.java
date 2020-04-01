@@ -16,26 +16,31 @@ public class Deck {
                 faceDown.push(card);
             }
         }
-        Collections.shuffle(faceDown);
-        Collections.shuffle(faceDown);
     }
 
-    public Card drawCard(){
+    public Card draw(){
         if (faceDown.isEmpty()) {
-            flipDeck();
+            flipDiscard();
         }
         return faceDown.pop();
     }
 
-    public void discardCard(Card card){
+    public void discard(Card card){
         discard.push(card);
     }
 
-    public boolean isDeckEmpty(){
+    public boolean isEmpty(){
         return faceDown.isEmpty() && discard.isEmpty();
     }
 
-    private void flipDeck(){
+    public void shuffle(){
+        if (faceDown.isEmpty()){
+            flipDiscard();
+        }
+        Collections.shuffle(faceDown);
+    }
+
+    private void flipDiscard(){
         while (!discard.empty()){
             faceDown.push(discard.pop());
         }
