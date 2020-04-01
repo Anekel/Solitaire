@@ -9,6 +9,22 @@ public class Solitaire {
     private HashMap<Character, BaseStack> baseStackMap = new HashMap<>();
     private Card currentCard;
 
+    public Solitaire(Deck deck){
+        // TODO receive input data?
+        int towers = 7;
+        for(int i = 0; i < towers; i++){
+            towerList.add(new BuildingTower());
+        }
+        int n = 0;
+        for(int i = n; i < towers; i++){
+            towerList.get(i).setHead(deck.draw());
+            n++;
+            for(int j = n; j < towers; j++){
+                towerList.get(j).pushFaceDown(deck.draw());
+            }
+        }
+    }
+
     public Solitaire(){
         // TODO receive input data?
     }
@@ -63,6 +79,6 @@ public class Solitaire {
         for (BuildingTower tower : towerList) {
             str += tower.toString() + "\n";
         }
-        return null;
+        return str;
     }
 }

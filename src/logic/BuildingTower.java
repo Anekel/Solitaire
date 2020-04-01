@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 public class BuildingTower {
-    private Stack<Card> faceDown;
+    private Stack<Card> faceDown = new Stack<>();
     private Card head;
     private Card end;
+
+    public BuildingTower(){    }
 
     public BuildingTower(Stack<Card> faceDown, Card head){
         setFaceDown(faceDown);
@@ -29,6 +31,10 @@ public class BuildingTower {
             card.prevCard = null;
         }
         return card;
+    }
+
+    public void pushFaceDown(Card card){
+        faceDown.push(card);
     }
 
     private Boolean isEmpty() {
