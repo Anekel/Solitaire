@@ -70,5 +70,12 @@ public class BuildingTower {
             this.end = curr;
         }
     }
+
+    public String toString(){
+        String str =  "[" + faceDown.size() + "] " + head.toString();
+        if (head.nextCard != null) str += end.toString();
+
+        return str;
+    }
 }
 

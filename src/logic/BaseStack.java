@@ -28,4 +28,9 @@ public class BaseStack {
         this.suit = suit;
     }
 
+    public String toString(){
+        Card top = cards.peek();
+        return "|" + top.toString() + "|";
+    }
+
 }

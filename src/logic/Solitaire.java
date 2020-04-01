@@ -2,6 +2,7 @@ package logic;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class Solitaire {
     private ArrayList<BuildingTower> towerList = new ArrayList<>();
@@ -45,5 +46,23 @@ public class Solitaire {
 
     public void setCurrentCard(Card card) {
         this.currentCard = card;
+    }
+
+    public String toString(){
+        String str = "";
+        //Current card
+        if (currentCard != null){
+            str += "Current card: " + currentCard.toString() + "\n";
+        }
+        //Base Stacks
+        for (Map.Entry entry : baseStackMap.entrySet()){
+            BaseStack stack = (BaseStack) entry.getValue();
+            str += stack.toString();
+        }
+        //Building towers
+        for (BuildingTower tower : towerList) {
+            str += tower.toString() + "\n";
+        }
+        return null;
     }
 }

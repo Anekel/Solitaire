@@ -45,8 +45,7 @@ public class Card {
     }
 
     public String toString(){
-        if (red) return "" + suit + value;
+        if (red) return " " + suit + value + " ";
         else return "(" + suit + value + ")";
-
     }
 }
