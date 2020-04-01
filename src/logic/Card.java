@@ -2,7 +2,7 @@ package logic;
 
 public class Card {
     private char suit;
-    private boolean color; //TODO better naming?
+    private boolean red;
     private int value;
     Card prevCard;
     Card nextCard;
@@ -19,8 +19,8 @@ public class Card {
         return suit;
     }
 
-    public boolean isColor() {
-        return color;
+    public boolean isRed() {
+        return red;
     }
 
     public int getValue() {
@@ -31,16 +31,22 @@ public class Card {
         this.suit = suit;
 
         if (suit == 'D' || suit == 'H') {
-            setColor(true);
+            setRed(true);
         }
-        else setColor(false);
+        else setRed(false);
     }
 
-    private void setColor(boolean color) {
-        this.color = color;
+    private void setRed(boolean red) {
+        this.red = red;
     }
 
     private void setValue(int value) {
         this.value = value;
+    }
+
+    public String toString(){
+        if (red) return "" + suit + value;
+        else return "(" + suit + value + ")";
+
     }
 }
