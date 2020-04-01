@@ -37,7 +37,7 @@ public class BuildingTower {
         faceDown.push(card);
     }
 
-    private Boolean isEmpty() {
+    public Boolean isEmpty() {
         return faceDown.isEmpty() && head == null;
     }
 

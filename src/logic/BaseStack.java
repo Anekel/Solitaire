@@ -33,4 +33,7 @@ public class BaseStack {
         return "|" + top.toString() + "|";
     }
 
+    public Card peek() {
+        return cards.peek();
+    }
 }

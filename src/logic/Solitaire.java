@@ -29,16 +29,16 @@ public class Solitaire {
         // TODO receive input data?
     }
 
-    private void removeFromTower(int index, Card card) {
+   public void removeFromTower(int index, Card card) {
         towerList.get(index).removeCard(card);
     }
 
-    private void moveToTower(int index, Card card) {
+    public void moveToTower(int index, Card card) {
         //Move one or more cards from one tower to another.
         towerList.get(index).addCard(card);
     }
 
-    private void moveToBaseStack (Card card) {
+    public void moveToBaseStack (Card card) {
         //Move a card to it's base stack
         char suit = card.getSuit();
         if (!baseStackMap.containsKey(suit)) baseStackMap.put(suit, new BaseStack(card));
