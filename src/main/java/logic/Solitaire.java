@@ -33,9 +33,9 @@ public class Solitaire {
         tower.removeCard(card);
     }
 
-    public void moveToTower(int index, Card card) {
+    public void moveToTower(BuildingTower tower, Card card) {
         //Move one or more cards from one tower to another.
-        towerList.get(index).addCard(card);
+        tower.addCard(card);
     }
 
     public void moveToBaseStack (Card card) {
