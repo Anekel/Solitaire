@@ -15,6 +15,7 @@ public class Algorithm {
             // check if End can be moved BaseStack
             Card card = tower.getEnd();
             if(baseStackCheck(card, game.getBaseStackMap())){
+                game.removeFromTower(tower, card);
                 game.moveToBaseStack(card);
                 return;
             }

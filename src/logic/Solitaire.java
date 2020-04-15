@@ -29,8 +29,8 @@ public class Solitaire {
         // TODO receive input data?
     }
 
-   public void removeFromTower(int index, Card card) {
-        towerList.get(index).removeCard(card);
+   public void removeFromTower(BuildingTower tower, Card card) {
+        tower.removeCard(card);
     }
 
     public void moveToTower(int index, Card card) {
@@ -75,6 +75,7 @@ public class Solitaire {
             BaseStack stack = (BaseStack) entry.getValue();
             str += stack.toString();
         }
+        str += "\n";
         //Building towers
         for (BuildingTower tower : towerList) {
             str += tower.toString() + "\n";
