@@ -7,7 +7,7 @@ import java.util.HashMap;
 
 public class Algorithm {
 
-    public static void ALG(Solitaire game){
+    public static boolean ALG(Solitaire game) {
 
         for(BuildingTower tower : game.getTowerList()){
             // check if tower is empty
@@ -18,6 +18,7 @@ public class Algorithm {
             if(baseStackCheck(card, game.getBaseStackMap())){
                 game.removeFromTower(tower, card);
                 game.moveToBaseStack(card);
+                return false;
             }
 
             //check if head can be moved to another tower
@@ -33,8 +34,11 @@ public class Algorithm {
             if(destination != null){ //reveres list order?
                 game.removeFromTower(tower, card);
                 game.moveToTower(destination, card);
+                return false;
             }
         }
+
+        return true;
     }
 
     private static BuildingTower towerCheck(Card card, ArrayList<BuildingTower> towerList){
