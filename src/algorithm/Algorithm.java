@@ -44,7 +44,7 @@ public class Algorithm {
             if(tower.isEmpty()) continue;
 
             boolean valuesMatch = tower.getEnd().getValue() - 1 == card.getValue();
-            boolean suitsMatch = tower.getEnd().getSuit() != card.getSuit();
+            boolean suitsMatch = tower.getEnd().isRed() != card.isRed();
 
             if (valuesMatch && suitsMatch) return tower;
         }
