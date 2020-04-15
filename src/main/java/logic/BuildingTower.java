@@ -23,7 +23,7 @@ public class BuildingTower {
 
     public Card removeCard(Card card){
         if (card.equals(head)){ //TODO what to do!?!?
-            setHead(faceDown.pop());
+            if (faceDown.size() > 0) setHead(faceDown.pop());
         }
         else {
             card.prevCard.nextCard = null;
