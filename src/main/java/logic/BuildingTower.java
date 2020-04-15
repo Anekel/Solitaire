@@ -78,8 +78,12 @@ public class BuildingTower {
     }
 
     public String toString(){
-        String str =  "[" + faceDown.size() + "] " + head.toString();
-        if (head.nextCard != null) str += end.toString();
+        String str =  "[" + faceDown.size() + "] ";
+        Card curr = head;
+        while (curr != null){
+            str += curr.toString();
+            curr = curr.nextCard;
+        }
 
         return str;
     }
