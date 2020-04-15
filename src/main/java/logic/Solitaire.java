@@ -1,6 +1,7 @@
 package logic;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,6 +23,12 @@ public class Solitaire {
             for(int j = n; j < towers; j++){
                 towerList.get(j).pushFaceDown(deck.draw());
             }
+        }
+        int length = towerList.size();
+
+        for (int i = 1 ; i < length; i++){
+            BuildingTower tower = towerList.remove(i);
+            towerList.add(0, tower);
         }
     }
 
