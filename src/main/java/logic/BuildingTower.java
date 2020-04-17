@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 public class BuildingTower {
-    private Stack<Card> faceDown = new Stack<>();
+    private Stack<Card> faceDown = new Stack<Card>();
     private Card head;
     private Card end;
 

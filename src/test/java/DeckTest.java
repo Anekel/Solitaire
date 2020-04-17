@@ -1,5 +1,5 @@
-package logic;
-
+import logic.Card;
+import logic.Deck;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
