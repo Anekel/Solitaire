@@ -11,6 +11,7 @@ public class Controller {
         deck.shuffle();
         Solitaire game = new Solitaire(deck);
 
+        game.setCurrentCard(deck.draw());
         System.out.println(game.toString());
 
         Scanner scan = new Scanner(System.in);
@@ -18,9 +19,10 @@ public class Controller {
         boolean isFinished = false;
         while (!isFinished){
             isFinished = Algorithm.ALG(game);
+            System.out.println(game.toString());
             if(isFinished) continue;
 
-            System.out.println(game.toString());
+            scan.next();
         }
         System.out.println("\n" + "Draw Card!");
     }

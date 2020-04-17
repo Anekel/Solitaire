@@ -9,6 +9,9 @@ public class Algorithm {
 
     public static boolean ALG(Solitaire game) {
 
+        // TODO: Simplify code
+        // TODO: Move King if tower is empty!!
+
         for(BuildingTower tower : game.getTowerList()){
             // check if tower is empty
             if(tower.isEmpty()) continue;
@@ -20,8 +23,6 @@ public class Algorithm {
                 game.moveToBaseStack(card);
                 return false;
             }
-
-            //check if head can be moved to another tower
         }
 
         for(BuildingTower tower : game.getTowerList()){
@@ -35,6 +36,24 @@ public class Algorithm {
                 game.removeFromTower(tower, card);
                 game.moveToTower(destination, card);
                 return false;
+            }
+        }
+
+        Card card = game.getCurrentCard();
+        if(card != null){
+            for(BuildingTower tower : game.getTowerList()){
+                // check if tower is empty
+                if(tower.isEmpty()) continue;
+
+                //check if current card can be moved to a tower
+                boolean valuesMatch = tower.getEnd().getValue() - 1 == card.getValue();
+                boolean suitsMatch = tower.getEnd().isRed() != card.isRed();
+
+                if (valuesMatch && suitsMatch){
+                    game.moveToTower(tower, card);
+                    game.setCurrentCard(null);
+                    return false;
+                }
             }
         }
 
