@@ -11,6 +11,7 @@ public class Algorithm {
 
         // TODO: Simplify code
         // TODO: Move King if tower is empty!!
+        // TODO: Logic for no more moves? vs draw card ??
 
         for(BuildingTower tower : game.getTowerList()){
             // check if tower is empty
@@ -30,12 +31,20 @@ public class Algorithm {
             if(tower.isEmpty()) continue;
 
             //check if head can be moved to another tower
-            Card card = tower.getHead();
-            BuildingTower destination = towerCheck(card, game.getTowerList());
-            if(destination != null){ //reveres list order?
-                game.removeFromTower(tower, card);
-                game.moveToTower(destination, card);
-                return false;
+            Card head = tower.getHead();
+
+            for(BuildingTower crossTower : game.getTowerList()){
+
+                if(crossTower.isEmpty()) continue;
+
+                boolean valuesMatch = crossTower.getEnd().getValue() - 1 == head.getValue();
+                boolean suitsMatch = crossTower.getEnd().isRed() != head.isRed();
+
+                if (valuesMatch && suitsMatch) {
+                    game.removeFromTower(tower, head);
+                    game.moveToTower(crossTower, head);
+                    return false;
+                }
             }
         }
 
