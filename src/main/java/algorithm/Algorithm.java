@@ -19,7 +19,10 @@ public class Algorithm {
 
             // check if End can be moved BaseStack
             Card card = tower.getEnd();
-            if(baseStackCheck(card, game.getBaseStackMap())){
+
+            boolean move = baseStackCheck(card, game.getBaseStackMap());
+
+            if(move){
                 game.removeFromTower(tower, card);
                 game.moveToBaseStack(card);
                 return false;
@@ -35,12 +38,9 @@ public class Algorithm {
 
             for(BuildingTower crossTower : game.getTowerList()){
 
-                if(crossTower.isEmpty()) continue;
+                boolean move = towerCheck(head, crossTower);
 
-                boolean valuesMatch = crossTower.getEnd().getValue() - 1 == head.getValue();
-                boolean suitsMatch = crossTower.getEnd().isRed() != head.isRed();
-
-                if (valuesMatch && suitsMatch) {
+                if (move){
                     game.removeFromTower(tower, head);
                     game.moveToTower(crossTower, head);
                     return false;
@@ -51,14 +51,10 @@ public class Algorithm {
         Card card = game.getCurrentCard();
         if(card != null){
             for(BuildingTower tower : game.getTowerList()){
-                // check if tower is empty
-                if(tower.isEmpty()) continue;
 
-                //check if current card can be moved to a tower
-                boolean valuesMatch = tower.getEnd().getValue() - 1 == card.getValue();
-                boolean suitsMatch = tower.getEnd().isRed() != card.isRed();
+                boolean move = towerCheck(card, tower);
 
-                if (valuesMatch && suitsMatch){
+                if (move){
                     game.moveToTower(tower, card);
                     game.setCurrentCard(null);
                     return false;
@@ -69,18 +65,16 @@ public class Algorithm {
         return true;
     }
 
-    private static BuildingTower towerCheck(Card card, ArrayList<BuildingTower> towerList){
+    private static boolean towerCheck(Card card, BuildingTower tower){
 
-        for(BuildingTower tower : towerList){
+        // check if tower is empty
+        if(tower.isEmpty()) return false;
 
-            if(tower.isEmpty()) continue;
+        //check if card can be moved to tower
+        boolean valuesMatch = tower.getEnd().getValue() - 1 == card.getValue();
+        boolean suitsMatch = tower.getEnd().isRed() != card.isRed();
 
-            boolean valuesMatch = tower.getEnd().getValue() - 1 == card.getValue();
-            boolean suitsMatch = tower.getEnd().isRed() != card.isRed();
-
-            if (valuesMatch && suitsMatch) return tower;
-        }
-        return null;
+        return valuesMatch && suitsMatch;
     }
 
     private static boolean baseStackCheck(Card card, HashMap<Character, BaseStack> baseStackMap){
