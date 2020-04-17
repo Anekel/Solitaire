@@ -24,6 +24,7 @@ public class BuildingTower {
     public Card removeCard(Card card){
         if (card.equals(head)){ //TODO what to do!?!?
             if (faceDown.size() > 0) setHead(faceDown.pop());
+            else setHead(null);
         }
         else {
             card.prevCard.nextCard = null;
@@ -64,6 +65,10 @@ public class BuildingTower {
     }
 
     public void setEnd(Card card) {
+        if (card == null) {
+            end = null;
+            return;
+        }
         if (card.nextCard == null) {
             this.end = card;
         }
