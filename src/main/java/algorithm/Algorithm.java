@@ -10,7 +10,6 @@ public class Algorithm {
     public static boolean ALG(Solitaire game) {
 
         // TODO: Simplify code
-        // TODO: Move King if tower is empty!!
         // TODO: Logic for no more moves? vs draw card ??
 
         for(BuildingTower tower : game.getTowerList()){
@@ -39,7 +38,6 @@ public class Algorithm {
             for(BuildingTower crossTower : game.getTowerList()){
 
                 boolean move = towerCheck(head, crossTower);
-
                 if (move){
                     game.removeFromTower(tower, head);
                     game.moveToTower(crossTower, head);
@@ -53,7 +51,6 @@ public class Algorithm {
             for(BuildingTower tower : game.getTowerList()){
 
                 boolean move = towerCheck(card, tower);
-
                 if (move){
                     game.moveToTower(tower, card);
                     game.setCurrentCard(null);
@@ -68,7 +65,10 @@ public class Algorithm {
     private static boolean towerCheck(Card card, BuildingTower tower){
 
         // check if tower is empty
-        if(tower.isEmpty()) return false;
+        if(tower.isEmpty()){
+            if (card.isKing()) return true;
+            else return false;
+        }
 
         //check if card can be moved to tower
         boolean valuesMatch = tower.getEnd().getValue() - 1 == card.getValue();

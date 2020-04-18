@@ -48,4 +48,8 @@ public class Card {
         if (red) return " " + suit + value + " ";
         else return "(" + suit + value + ")";
     }
+
+    public boolean isKing() {
+        return value == 13;
+    }
 }

@@ -16,9 +16,12 @@ public class BuildingTower {
     }
 
     public void addCard(Card card){
-        card.prevCard = end;
-        card.prevCard.nextCard = card;
-        setEnd(card);
+        if (head == null) setHead(card);
+        else{
+            card.prevCard = end;
+            card.prevCard.nextCard = card;
+            setEnd(card);
+        }
     }
 
     public Card removeCard(Card card){
