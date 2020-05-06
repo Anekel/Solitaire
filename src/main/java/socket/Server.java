@@ -1,10 +1,17 @@
 package socket;
 
+import DTO.BuildingTowerDTO;
+import DTO.CardDTO;
+import DTO.SolitaireDTO;
+import logic.Card;
+import logic.Solitaire;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.LinkedList;
 
 public class Server {
 
@@ -15,14 +22,14 @@ public class Server {
 
         //Outputting dataObject to the Client
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
-        TestData messageToClient = new TestData("This is a message from the Server! You're connected!");
-        objectOutputStream.writeObject(messageToClient);
+        SolitaireDTO testData1 = new SolitaireDTO();
+        objectOutputStream.writeObject(testData1);
 
         //reading object input from client
         ObjectInputStream input = new ObjectInputStream(socket.getInputStream());
-        TestData testData = (TestData)input.readObject();
-        System.out.println(testData.text);
-
+        SolitaireDTO testData = (SolitaireDTO) input.readObject();
+        testData.getTower(0);
+        System.out.println(testData.getCurrentCard().getSuit());
         serverSocket.close();
     }
 }
