@@ -8,6 +8,10 @@ public class CardDTO implements Serializable {
     private int value;
 
     public CardDTO(){ }
+    public CardDTO(char suit, int value){
+        this.suit = suit;
+        this.value = value;
+    }
 
     public char getSuit() {
         return suit;

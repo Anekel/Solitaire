@@ -11,7 +11,11 @@ public class SolitaireDTO implements Serializable {
     private ArrayList<BuildingTowerDTO> towers = new ArrayList<>();
     private HashMap<Character, CardDTO> baseStack;
 
-    public SolitaireDTO() {    }
+    public SolitaireDTO() {
+        for (int i = 0; i < 7; i++){
+            towers.add(new BuildingTowerDTO());
+        }
+    }
 
     public CardDTO getCurrentCard() {
         return currentCard;

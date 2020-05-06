@@ -1,11 +1,21 @@
 package DTO;
 
+import logic.BuildingTower;
+
+import java.io.Serializable;
 import java.util.LinkedList;
 
-public class BuildingTowerDTO {
+public class BuildingTowerDTO implements Serializable {
 
     private boolean faceDownCards;
     private LinkedList<CardDTO> faceUpCards;
+
+    public BuildingTowerDTO(){ }
+
+    public BuildingTowerDTO(boolean b, LinkedList<CardDTO> faceUp) {
+        this.faceDownCards = b;
+        this.faceUpCards = faceUp;
+    }
 
     public boolean isFaceDownCards() {
         return faceDownCards;
