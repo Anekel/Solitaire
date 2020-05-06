@@ -8,8 +8,7 @@ import java.util.LinkedList;
 public class SolitaireDTO implements Serializable {
 
     private CardDTO currentCard;
-    private boolean[] faceDown = new boolean[7];
-    private ArrayList<LinkedList<CardDTO>> towers = new ArrayList<>();
+    private ArrayList<BuildingTowerDTO> towers = new ArrayList<>();
     private HashMap<Character, CardDTO> baseStack;
 
     public SolitaireDTO() {    }
@@ -30,27 +29,19 @@ public class SolitaireDTO implements Serializable {
         this.baseStack = baseStack;
     }
 
-    public ArrayList<LinkedList<CardDTO>> getTowers() {
+    public ArrayList<BuildingTowerDTO> getTowers() {
         return towers;
     }
 
-    public void setTowers(ArrayList<LinkedList<CardDTO>> towers) {
+    public void setTowers(ArrayList<BuildingTowerDTO> towers) {
         this.towers = towers;
     }
 
-    public LinkedList<CardDTO> getTower(int i) {
+    public BuildingTowerDTO getTower(int i) {
         return towers.get(i);
     }
 
-    public void setTowers(int i, LinkedList<CardDTO> tower) {
+    public void setTowers(int i, BuildingTowerDTO tower) {
         this.towers.set(i, tower);
-    }
-
-    public boolean[] getFaceDown() {
-        return faceDown;
-    }
-
-    public void setFaceDown(boolean[] faceDown) {
-        this.faceDown = faceDown;
     }
 }
