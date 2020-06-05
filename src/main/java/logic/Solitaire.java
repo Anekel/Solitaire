@@ -63,6 +63,9 @@ public class Solitaire {
             BuildingTower buildingTower = new BuildingTower();
 
             //TODO face down?
+            if (tower.isFaceDownCards()) {
+                buildingTower.pushFaceDown(new Card('X', 0));
+            }
 
             for (CardDTO card : tower.getFaceUpCards()) {
                 buildingTower.addCard(dtoToCard(card));
