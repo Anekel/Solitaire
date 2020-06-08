@@ -3,6 +3,7 @@ package socket;
 import DTO.BuildingTowerDTO;
 import DTO.CardDTO;
 import DTO.SolitaireDTO;
+import com.google.gson.Gson;
 import logic.Card;
 import logic.Solitaire;
 import org.json.JSONObject;
@@ -35,9 +36,14 @@ public class Server {
             while ((line = in.readLine()) != null) {
                 sb.append(line);
             }
-            JSONObject json = new JSONObject(sb.toString());
+            System.out.println("received: " + sb.toString());
 
-            System.out.println("received: " + json);
+            Gson gson = new Gson();
+            CardDTO card = gson.fromJson(sb.toString(), CardDTO.class);
+
+//            JSONObject json = new JSONObject(sb.toString());
+
+            System.out.println("received: " + card.getValue());
         }
 
 
