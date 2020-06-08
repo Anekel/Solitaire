@@ -5,6 +5,7 @@ import DTO.CardDTO;
 import DTO.SolitaireDTO;
 import logic.Card;
 import logic.Solitaire;
+import org.json.JSONObject;
 
 import java.io.*;
 import java.io.ObjectInputStream;
@@ -18,8 +19,6 @@ public class Server {
     public static void main(String[] args) throws IOException, ClassNotFoundException {
 
         String fromClient;
-        String toClient;
-
         ServerSocket server = new ServerSocket(8080);
         System.out.println("wait for connection on port 8080");
 
@@ -30,26 +29,18 @@ public class Server {
             BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));
             PrintWriter out = new PrintWriter(client.getOutputStream(),true);
 
-            fromClient = in.readLine();
-            System.out.println("received: " + fromClient);
 
-            if(fromClient.equals("Hello")) {
-                toClient = "olleH";
-                System.out.println("send olleH");
-                out.println(toClient);
-                fromClient = in.readLine();
-                System.out.println("received: " + fromClient);
-
-                if(fromClient.equals("Bye")) {
-                    toClient = "eyB";
-                    System.out.println("send eyB");
-                    out.println(toClient);
-                    client.close();
-                    run = false;
-                    System.out.println("socket closed");
-                }
+            StringBuilder sb = new StringBuilder();
+            String line;
+            while ((line = in.readLine()) != null) {
+                sb.append(line);
             }
+            JSONObject json = new JSONObject(sb.toString());
+
+            System.out.println("received: " + json);
         }
+
+
         System.exit(0);
     }
 }
