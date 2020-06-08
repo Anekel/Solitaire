@@ -1,52 +1,70 @@
 package socket;
 
-import DTO.BuildingTowerDTO;
-import DTO.CardDTO;
 import DTO.SolitaireDTO;
+import algorithm.Algorithm;
 import com.google.gson.Gson;
-import logic.Card;
 import logic.Solitaire;
-import org.json.JSONObject;
 
 import java.io.*;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.LinkedList;
 
 public class Server {
 
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
+    public static void main(String[] args) throws IOException {
 
-        String fromClient;
         ServerSocket server = new ServerSocket(8080);
-        System.out.println("wait for connection on port 8080");
+        System.out.println("Server started");
 
         boolean run = true;
         while(run) {
             Socket client = server.accept();
-            System.out.println("got connection on port 8080");
+            System.out.println("Client accepted");
+
             BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));
+
+            SolitaireDTO dto = readData(in);
+
+            String str = runALG(dto);
+
             PrintWriter out = new PrintWriter(client.getOutputStream(),true);
-
-
-            StringBuilder sb = new StringBuilder();
-            String line;
-            while ((line = in.readLine()) != null) {
-                sb.append(line);
-            }
-            System.out.println("received: " + sb.toString());
-
-            Gson gson = new Gson();
-            CardDTO card = gson.fromJson(sb.toString(), CardDTO.class);
-
-//            JSONObject json = new JSONObject(sb.toString());
-
-            System.out.println("received: " + card.getValue());
+            sendData(out, str);
         }
 
-
         System.exit(0);
+    }
+
+    private static SolitaireDTO readData(BufferedReader in) throws IOException {
+
+        StringBuilder sb = new StringBuilder();
+        String line;
+        while ((line = in.readLine()) != null) {
+            sb.append(line);
+        }
+        System.out.println("received: " + sb.toString());
+
+        Gson gson = new Gson();
+        SolitaireDTO game = gson.fromJson(sb.toString(), SolitaireDTO.class);
+
+        return game;
+    }
+
+    private static void sendData(PrintWriter out, String string){
+        out.print(string);
+    }
+
+    private static String runALG(SolitaireDTO dto) {
+        Solitaire game = new Solitaire(dto);
+
+        StringBuilder stringBuilder = new StringBuilder(game.toString());
+        stringBuilder.append("\n\n");
+
+        Algorithm.ALG(game);
+
+        stringBuilder.append(game.toString());
+
+        System.out.print(stringBuilder.toString());
+
+        return stringBuilder.toString();
     }
 }
