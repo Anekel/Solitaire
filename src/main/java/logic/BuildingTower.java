@@ -25,9 +25,14 @@ public class BuildingTower {
     }
 
     public Card removeCard(Card card){
-        if (card.equals(head)){ //TODO what to do!?!?
-            if (faceDown.size() > 0) setHead(faceDown.pop());
-            else setHead(null);
+        if (card.equals(head)){
+
+            // For hinting
+            setHead(null);
+//
+//            // For simulation
+//            if (faceDown.size() > 0) setHead(faceDown.pop());
+//            else setHead(null);
         }
         else {
             card.prevCard.nextCard = null;
