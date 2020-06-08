@@ -1,5 +1,9 @@
 package logic;
 
+import DTO.BuildingTowerDTO;
+import DTO.CardDTO;
+import DTO.SolitaireDTO;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -11,7 +15,6 @@ public class Solitaire {
     private Card currentCard;
 
     public Solitaire(Deck deck){
-        // TODO receive input data?
         int towers = 7;
         for(int i = 0; i < towers; i++){
             towerList.add(new BuildingTower());
@@ -32,8 +35,44 @@ public class Solitaire {
         }
     }
 
-    public Solitaire(){
-        // TODO receive input data?
+    public Solitaire(){    }
+
+    public Solitaire(SolitaireDTO solitaireDTO){
+        setCurrentCard(dtoToCard(solitaireDTO.getCurrentCard()));
+        setBaseStackMap(dtoToBaseStackMap(solitaireDTO.getBaseStack()));
+        setTowerList(dtoToTowerList(solitaireDTO.getTowers()));
+    }
+
+    private Card dtoToCard(CardDTO cardDTO){
+        return new Card(cardDTO.getSuit(), cardDTO.getValue());
+    }
+
+    private HashMap<Character, BaseStack> dtoToBaseStackMap(HashMap<Character, CardDTO> baseStackDTO){
+        HashMap<Character, BaseStack> baseStackMap = new HashMap<>();
+
+        for (CardDTO cardDTO : baseStackDTO.values()){
+            baseStackMap.put(cardDTO.getSuit(), new BaseStack(dtoToCard(cardDTO)));
+        }
+        return baseStackMap;
+    }
+
+    private ArrayList<BuildingTower> dtoToTowerList(ArrayList<BuildingTowerDTO> towers){
+        ArrayList<BuildingTower> towerList = new ArrayList<>();
+
+        for (BuildingTowerDTO tower: towers) {
+            BuildingTower buildingTower = new BuildingTower();
+
+            //TODO face down?
+            if (tower.isFaceDownCards()) {
+                buildingTower.pushFaceDown(new Card('X', 0));
+            }
+
+            for (CardDTO card : tower.getFaceUpCards()) {
+                buildingTower.addCard(dtoToCard(card));
+            }
+            towerList.add(buildingTower);
+        }
+        return towerList;
     }
 
    public void removeFromTower(BuildingTower tower, Card card) {
@@ -59,8 +98,16 @@ public class Solitaire {
         return towerList;
     }
 
+    public void setTowerList(ArrayList<BuildingTower> towerList) {
+        this.towerList = towerList;
+    }
+
     public HashMap<Character, BaseStack> getBaseStackMap() {
         return baseStackMap;
+    }
+
+    public void setBaseStackMap(HashMap<Character, BaseStack> baseStackMap) {
+        this.baseStackMap = baseStackMap;
     }
 
     public Card getCurrentCard() {
