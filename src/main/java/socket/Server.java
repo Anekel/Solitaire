@@ -27,8 +27,10 @@ public class Server {
 
             String str = runALG(dto);
 
+            client = server.accept();
             PrintWriter out = new PrintWriter(client.getOutputStream(),true);
             sendData(out, str);
+            client.close();
         }
 
         System.exit(0);
@@ -50,7 +52,7 @@ public class Server {
     }
 
     private static void sendData(PrintWriter out, String string){
-        out.print(string);
+        out.println(string);
     }
 
     private static String runALG(SolitaireDTO dto) {
