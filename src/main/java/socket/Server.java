@@ -19,7 +19,7 @@ public class Server {
         boolean run = true;
         while(run) {
             Socket client = server.accept();
-            System.out.println("Client accepted");
+            System.out.println("\nClient accepted");
 
             BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));
 
@@ -59,11 +59,14 @@ public class Server {
         Solitaire game = new Solitaire(dto);
 
         StringBuilder stringBuilder = new StringBuilder(game.toString());
-        stringBuilder.append("\n\n");
+        stringBuilder.append("\n");
 
-        Algorithm.ALG(game);
-
-        stringBuilder.append(game.toString());
+        if (!Algorithm.ALG(game)){
+            stringBuilder.append(game.toString());
+        }
+        else {
+            stringBuilder.append("Draw card!");
+        }
 
         System.out.print(stringBuilder.toString());
 
