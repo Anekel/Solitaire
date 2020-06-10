@@ -1,10 +1,14 @@
 package logic;
 
 import algorithm.Algorithm;
+import algorithm.ReturnData;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Controller {
+
+    private static ArrayList<Card> movedKings = new ArrayList<>();
 
     public static void main(String[] args) {
         Deck deck = new Deck();
@@ -16,11 +20,13 @@ public class Controller {
 
         Scanner scan = new Scanner(System.in);
 
-        boolean isFinished = false;
-        while (!isFinished){
-            isFinished = Algorithm.ALG(game);
+        boolean noMoves = false;
+        while (!noMoves){
+            ReturnData returnData = Algorithm.ALG(game, movedKings);
+            noMoves = returnData.isNoMoves();
+            movedKings = returnData.getMovedKings();
             System.out.println(game.toString());
-            if(isFinished) continue;
+            if(noMoves) continue;
 
             scan.next();
         }
