@@ -1,7 +1,10 @@
-package logic;
+package Controller;
 
 import algorithm.Algorithm;
 import algorithm.ReturnData;
+import logic.Card;
+import logic.Deck;
+import logic.Solitaire;
 
 import java.util.ArrayList;
 import java.util.Scanner;
