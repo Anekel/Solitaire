@@ -13,18 +13,29 @@ public class Algorithm {
 
         movedKings = kings;
 
+        Card card = game.getCurrentCard();
+        if(card != null){
+
+            boolean move = baseStackCheck(card, game.getBaseStackMap());
+            if(move){
+                game.moveToBaseStack(card);
+                game.setCurrentCard(null);
+                return new ReturnData(false, movedKings);
+            }
+        }
+
         for(BuildingTower tower : game.getTowerList()){
             // check if tower is empty
             if(tower.isEmpty()) continue;
 
             // check if End can be moved BaseStack
-            Card card = tower.getEnd();
+            Card end = tower.getEnd();
 
-            boolean move = baseStackCheck(card, game.getBaseStackMap());
+            boolean move = baseStackCheck(end, game.getBaseStackMap());
 
             if(move){
-                game.removeFromTower(tower, card);
-                game.moveToBaseStack(card);
+                game.removeFromTower(tower, end);
+                game.moveToBaseStack(end);
                 return new ReturnData(false, movedKings);
             }
         }
@@ -47,10 +58,8 @@ public class Algorithm {
             }
         }
 
-        Card card = game.getCurrentCard();
+        card = game.getCurrentCard();
         if(card != null){
-
-            // TODO if curr card cam be moved to base stack!
 
             for(BuildingTower tower : game.getTowerList()){
 
