@@ -9,7 +9,7 @@ import logic.Solitaire;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Controller {
+public class SimulationController {
 
     private static ArrayList<Card> movedKings = new ArrayList<>();
 
