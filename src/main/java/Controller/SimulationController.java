@@ -22,17 +22,27 @@ public class SimulationController {
         System.out.println(game.toString());
 
         Scanner scan = new Scanner(System.in);
+        String str = "";
 
-        boolean noMoves = false;
-        while (!noMoves){
-            ReturnData returnData = Algorithm.ALG(game, movedKings);
-            noMoves = returnData.isNoMoves();
-            movedKings = returnData.getMovedKings();
+        while (!str.equals("X")){
+            boolean noMoves = false;
+            while (!noMoves){
+                ReturnData returnData = Algorithm.ALG(game, movedKings);
+                noMoves = returnData.isNoMoves();
+                movedKings = returnData.getMovedKings();
+                System.out.println(game.toString());
+                if(noMoves) continue;
+
+                str = scan.next();
+            }
+
+            if(game.getCurrentCard() != null){
+                deck.discard(game.getCurrentCard());
+            }
+            game.setCurrentCard(deck.draw());
+            System.out.println("\n" + "Card drawn!");
             System.out.println(game.toString());
-            if(noMoves) continue;
-
-            scan.next();
+            str = scan.next();
         }
-        System.out.println("\n" + "Draw Card!");
     }
 }
