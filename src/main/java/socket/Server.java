@@ -1,15 +1,11 @@
 package socket;
 
-import DTO.SolitaireDTO;
-import algorithm.Algorithm;
-import algorithm.ReturnData;
+import DTO.*;
+import algorithm.*;
+import logic.*;
 import com.google.gson.Gson;
-import logic.Card;
-import logic.Solitaire;
 
 import java.io.*;
-import java.net.ServerSocket;
-import java.net.Socket;
 import java.util.ArrayList;
 
 public class Server {
@@ -18,49 +14,26 @@ public class Server {
 
     public static void main(String[] args) throws IOException {
 
-        ServerSocket server = new ServerSocket(8080);
-        System.out.println("Server started");
+        ClientSocket clientSocket = new ClientSocket(8080);
 
         boolean run = true;
         while(run) {
-            Socket client = server.accept();
-            System.out.println("\nClient accepted");
 
-            BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));
+            String data = clientSocket.readData();
 
-            SolitaireDTO dto = readData(in);
+            Gson gson = new Gson();
+            SolitaireDTO gameDTO = gson.fromJson(data, SolitaireDTO.class);
 
-            String str = runALG(dto);
+            String str = runALG(gameDTO);
 
-            client = server.accept();
-            PrintWriter out = new PrintWriter(client.getOutputStream(),true);
-            sendData(out, str);
-            client.close();
+            clientSocket.sendData(str);
         }
 
         System.exit(0);
     }
 
-    private static SolitaireDTO readData(BufferedReader in) throws IOException {
-
-        StringBuilder sb = new StringBuilder();
-        String line;
-        while ((line = in.readLine()) != null) {
-            sb.append(line);
-        }
-        System.out.println("received: " + sb.toString());
-
-        Gson gson = new Gson();
-        SolitaireDTO game = gson.fromJson(sb.toString(), SolitaireDTO.class);
-
-        return game;
-    }
-
-    private static void sendData(PrintWriter out, String string){
-        out.println(string);
-    }
-
     private static String runALG(SolitaireDTO dto) {
+
         Solitaire game = new Solitaire(dto);
 
         StringBuilder stringBuilder = new StringBuilder(game.toString());
