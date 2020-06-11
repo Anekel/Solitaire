@@ -8,6 +8,7 @@ public class SolitaireStateFactory {
 
     public void updateGame(SolitaireDTO DTO){
         if (game == null){
+            // TODO transfer code from SolitaireConstructor?
             game = new Solitaire(DTO);
         }
         else{

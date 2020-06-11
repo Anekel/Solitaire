@@ -38,6 +38,7 @@ public class Solitaire {
     public Solitaire(){    }
 
     public Solitaire(SolitaireDTO solitaireDTO){
+        // TODO move to Factory?
         setCurrentCard(dtoToCard(solitaireDTO.getCurrentCard()));
         setBaseStackMap(dtoToBaseStackMap(solitaireDTO.getBaseStack()));
         setTowerList(dtoToTowerList(solitaireDTO.getTowers()));
@@ -65,7 +66,6 @@ public class Solitaire {
         for (BuildingTowerDTO tower: towers) {
             BuildingTower buildingTower = new BuildingTower();
 
-            //TODO face down?
             if (tower.isFaceDownCards()) {
                 buildingTower.pushFaceDown(new Card('X', 0));
             }
