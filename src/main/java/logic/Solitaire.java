@@ -44,7 +44,10 @@ public class Solitaire {
     }
 
     private Card dtoToCard(CardDTO cardDTO){
-        return new Card(cardDTO.getSuit(), cardDTO.getValue());
+        if(cardDTO == null) return null;
+        else{
+            return new Card(cardDTO.getSuit(), cardDTO.getValue());
+        }
     }
 
     private HashMap<Character, BaseStack> dtoToBaseStackMap(HashMap<Character, CardDTO> baseStackDTO){
