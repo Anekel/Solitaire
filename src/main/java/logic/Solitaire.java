@@ -127,6 +127,9 @@ public class Solitaire {
         if (currentCard != null){
             str += "Current card: " + currentCard.toString() + "\n";
         }
+        else{
+            str += "Current card: NULL\n";
+        }
         //Base Stacks
         for (Map.Entry entry : baseStackMap.entrySet()){
             BaseStack stack = (BaseStack) entry.getValue();

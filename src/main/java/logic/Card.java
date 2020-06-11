@@ -45,8 +45,33 @@ public class Card {
     }
 
     public String toString(){
-        if (red) return " " + suit + value + " ";
-        else return "(" + suit + value + ")";
+
+        String val = type(value);
+
+        if (red) return " " + suit + val + " ";
+        else return "(" + suit + val + ")";
+    }
+
+    private String type(int value){
+        String val;
+
+        switch (value){
+            case 1:
+                val = "A";
+                break;
+            case 11:
+                val = "J";
+                break;
+            case 12:
+                val = "Q";
+                break;
+            case 13:
+                val = "K";
+                break;
+            default:
+                val = "" + value;
+        }
+        return val;
     }
 
     public boolean isKing() {

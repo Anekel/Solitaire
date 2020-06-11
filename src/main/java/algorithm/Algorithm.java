@@ -7,24 +7,36 @@ import java.util.HashMap;
 
 public class Algorithm {
 
-    public static boolean ALG(Solitaire game) {
+    static ArrayList<Card> movedKings;
 
-        // TODO: Simplify code
-        // TODO: Logic for no more moves? vs draw card ??
+    public static ReturnData ALG(Solitaire game, ArrayList<Card> kings) {
+
+        movedKings = kings;
+
+        Card card = game.getCurrentCard();
+        if(card != null){
+
+            boolean move = baseStackCheck(card, game.getBaseStackMap());
+            if(move){
+                game.moveToBaseStack(card);
+                game.setCurrentCard(null);
+                return new ReturnData(false, movedKings);
+            }
+        }
 
         for(BuildingTower tower : game.getTowerList()){
             // check if tower is empty
             if(tower.isEmpty()) continue;
 
             // check if End can be moved BaseStack
-            Card card = tower.getEnd();
+            Card end = tower.getEnd();
 
-            boolean move = baseStackCheck(card, game.getBaseStackMap());
+            boolean move = baseStackCheck(end, game.getBaseStackMap());
 
             if(move){
-                game.removeFromTower(tower, card);
-                game.moveToBaseStack(card);
-                return false;
+                game.removeFromTower(tower, end);
+                game.moveToBaseStack(end);
+                return new ReturnData(false, movedKings);
             }
         }
 
@@ -41,32 +53,35 @@ public class Algorithm {
                 if (move){
                     game.removeFromTower(tower, head);
                     game.moveToTower(crossTower, head);
-                    return false;
+                    return new ReturnData(false, movedKings);
                 }
             }
         }
 
-        Card card = game.getCurrentCard();
+        card = game.getCurrentCard();
         if(card != null){
+
             for(BuildingTower tower : game.getTowerList()){
 
                 boolean move = towerCheck(card, tower);
                 if (move){
                     game.moveToTower(tower, card);
                     game.setCurrentCard(null);
-                    return false;
+                    return new ReturnData(false, movedKings);
                 }
             }
         }
-
-        return true;
+        return new ReturnData(true, movedKings);
     }
 
     private static boolean towerCheck(Card card, BuildingTower tower){
 
         // check if tower is empty
         if(tower.isEmpty()){
-            if (card.isKing()) return true;
+            if (card.isKing() && !movedKings.contains(card)) {
+                movedKings.add(card);
+                return true;
+            }
             else return false;
         }
 

@@ -2,14 +2,19 @@ package socket;
 
 import DTO.SolitaireDTO;
 import algorithm.Algorithm;
+import algorithm.ReturnData;
 import com.google.gson.Gson;
+import logic.Card;
 import logic.Solitaire;
 
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 
 public class Server {
+
+    private static ArrayList<Card> movedKings = new ArrayList<>();
 
     public static void main(String[] args) throws IOException {
 
@@ -61,7 +66,10 @@ public class Server {
         StringBuilder stringBuilder = new StringBuilder(game.toString());
         stringBuilder.append("\n");
 
-        if (!Algorithm.ALG(game)){
+        ReturnData returnData = Algorithm.ALG(game, movedKings);
+        movedKings = returnData.getMovedKings();
+
+        if (!returnData.isNoMoves()){
             stringBuilder.append(game.toString());
         }
         else {
