@@ -35,49 +35,11 @@ public class Solitaire {
         }
     }
 
-    public Solitaire(){    }
+    public Solitaire(){}
 
     public Solitaire(SolitaireDTO solitaireDTO){
         // TODO move to Factory?
-        setCurrentCard(dtoToCard(solitaireDTO.getCurrentCard()));
-        setBaseStackMap(dtoToBaseStackMap(solitaireDTO.getBaseStack()));
-        setTowerList(dtoToTowerList(solitaireDTO.getTowers()));
     }
-
-    private Card dtoToCard(CardDTO cardDTO){
-        if(cardDTO == null) return null;
-        else{
-            return new Card(cardDTO.getSuit(), cardDTO.getValue());
-        }
-    }
-
-    private HashMap<Character, BaseStack> dtoToBaseStackMap(HashMap<Character, CardDTO> baseStackDTO){
-        HashMap<Character, BaseStack> baseStackMap = new HashMap<>();
-
-        for (CardDTO cardDTO : baseStackDTO.values()){
-            baseStackMap.put(cardDTO.getSuit(), new BaseStack(dtoToCard(cardDTO)));
-        }
-        return baseStackMap;
-    }
-
-    private ArrayList<BuildingTower> dtoToTowerList(ArrayList<BuildingTowerDTO> towers){
-        ArrayList<BuildingTower> towerList = new ArrayList<>();
-
-        for (BuildingTowerDTO tower: towers) {
-            BuildingTower buildingTower = new BuildingTower();
-
-            if (tower.isFaceDownCards()) {
-                buildingTower.pushFaceDown(new Card('X', 0));
-            }
-
-            for (CardDTO card : tower.getFaceUpCards()) {
-                buildingTower.addCard(dtoToCard(card));
-            }
-            towerList.add(buildingTower);
-        }
-        return towerList;
-    }
-
    public void removeFromTower(BuildingTower tower, Card card) {
         tower.removeCard(card);
     }
