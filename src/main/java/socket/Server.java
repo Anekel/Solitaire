@@ -43,6 +43,8 @@ public class Server {
         ReturnData returnData = Algorithm.ALG(game, movedKings);
         movedKings = returnData.getMovedKings();
 
+        stateFactory.setGame(game);
+
         if (!returnData.isNoMoves()){
             stringBuilder.append(game.toString());
         }

@@ -18,33 +18,21 @@ public class SolitaireStateFactory {
         Solitaire game = create(DTO);
 
         if (this.game == null){
-            this.game = game;
+            setGame(game);
         }
         else{
-            this.game = changes(game);
+            setGame(changes(game));
         }
     }
 
     private Solitaire changes(Solitaire update){
-        Solitaire game = this.game;
+        Solitaire game = getGame();
 
-        if (!game.getCurrentCard().equals(update.getCurrentCard())){
+        if (!cardsEqual(game.getCurrentCard(), update.getCurrentCard())){
             game.setCurrentCard(update.getCurrentCard());
         }
 
-        //https://stackoverflow.com/questions/15985266/how-to-iterate-through-two-arraylists-simultaneously
-
-        Iterator<BuildingTower> gameTowers = game.getTowerList().iterator();
-        Iterator<BuildingTower> updateTowers = update.getTowerList().iterator();
-
-        while (gameTowers.hasNext() && updateTowers.hasNext()){
-            BuildingTower tower = gameTowers.next();
-            BuildingTower tower1 = gameTowers.next();
-
-            if (!tower.getEnd().equals(tower1.getEnd())){
-                tower.addCard(tower1.getEnd());
-            }
-        }
+        checkTowers(game.getTowerList(), update.getTowerList());
 
         for (Map.Entry entry : update.getBaseStackMap().entrySet()){
             BaseStack stack = (BaseStack) entry.getValue();
@@ -61,6 +49,25 @@ public class SolitaireStateFactory {
 
 
         return game;
+    }
+
+    private boolean cardsEqual(Card prev, Card update){
+        return prev.equals(update);
+    }
+
+    private void checkTowers(ArrayList<BuildingTower> prev, ArrayList<BuildingTower> update){
+        //https://stackoverflow.com/questions/15985266/how-to-iterate-through-two-arraylists-simultaneously
+        Iterator<BuildingTower> prevIt = prev.iterator();
+        Iterator<BuildingTower> updateIt = update.iterator();
+
+        while (prevIt.hasNext() && updateIt.hasNext()){
+            BuildingTower prevTower = prevIt.next();
+            BuildingTower updateTower = updateIt.next();
+
+            if (!cardsEqual(prevTower.getEnd(), updateTower.getEnd())){
+                prevTower.addCard(updateTower.getEnd());
+            }
+        }
     }
 
     public Solitaire getGame() {
