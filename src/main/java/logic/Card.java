@@ -44,15 +44,20 @@ public class Card {
         this.value = value;
     }
 
+    public boolean isKing() {
+        return value == 13;
+    }
+
+    // ToStrings
     public String toString(){
 
-        String val = type(value);
+        String val = valueToString(value);
 
         if (red) return " " + suit + val + " ";
         else return "(" + suit + val + ")";
     }
 
-    private String type(int value){
+    private String valueToString(int value){
         String val;
 
         switch (value){
@@ -72,9 +77,5 @@ public class Card {
                 val = "" + value;
         }
         return val;
-    }
-
-    public boolean isKing() {
-        return value == 13;
     }
 }
