@@ -15,10 +15,7 @@ public class SolitaireStateFactory {
 
     public void updateGame(SolitaireDTO DTO){
 
-        Solitaire game = new Solitaire();
-        game.setCurrentCard(dtoToCard(DTO.getCurrentCard()));
-        game.setBaseStackMap(dtoToBaseStackMap(DTO.getBaseStack()));
-        game.setTowerList(dtoToTowerList(DTO.getTowers()));
+        Solitaire game = create(DTO);
 
         if (this.game == null){
             this.game = game;
@@ -26,14 +23,6 @@ public class SolitaireStateFactory {
         else{
             this.game = changes(game);
         }
-    }
-
-    private Solitaire create(SolitaireDTO solitaireDTO){
-        Solitaire game = new Solitaire();
-        game.setCurrentCard(dtoToCard(solitaireDTO.getCurrentCard()));
-        game.setBaseStackMap(dtoToBaseStackMap(solitaireDTO.getBaseStack()));
-        game.setTowerList(dtoToTowerList(solitaireDTO.getTowers()));
-        return game;
     }
 
     private Solitaire changes(Solitaire update){
@@ -87,6 +76,14 @@ public class SolitaireStateFactory {
         else{
             return new Card(cardDTO.getSuit(), cardDTO.getValue());
         }
+    }
+
+    private Solitaire create(SolitaireDTO solitaireDTO){
+        Solitaire game = new Solitaire();
+        game.setCurrentCard(dtoToCard(solitaireDTO.getCurrentCard()));
+        game.setBaseStackMap(dtoToBaseStackMap(solitaireDTO.getBaseStack()));
+        game.setTowerList(dtoToTowerList(solitaireDTO.getTowers()));
+        return game;
     }
 
     private HashMap<Character, BaseStack> dtoToBaseStackMap(HashMap<Character, CardDTO> baseStackDTO){
