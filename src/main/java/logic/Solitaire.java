@@ -37,9 +37,6 @@ public class Solitaire {
 
     public Solitaire(){}
 
-    public Solitaire(SolitaireDTO solitaireDTO){
-        // TODO move to Factory?
-    }
    public void removeFromTower(BuildingTower tower, Card card) {
         tower.removeCard(card);
     }
