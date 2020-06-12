@@ -34,19 +34,7 @@ public class SolitaireStateFactory {
 
         checkTowers(game.getTowerList(), update.getTowerList());
 
-        for (Map.Entry entry : update.getBaseStackMap().entrySet()){
-            BaseStack stack = (BaseStack) entry.getValue();
-
-            if(!game.getBaseStackMap().containsKey(stack.getSuit())){
-                game.moveToBaseStack(stack.peek());
-            }
-            else if(game.getBaseStackMap().containsKey(stack.getSuit())){
-                if(!game.getBaseStackMap().get(stack.getSuit()).peek().equals(stack.peek())){
-                    game.moveToBaseStack(stack.peek());
-                }
-            }
-        }
-
+        checkBaseStacks(game.getBaseStackMap(), update.getBaseStackMap());
 
         return game;
     }
@@ -66,6 +54,21 @@ public class SolitaireStateFactory {
 
             if (!cardsEqual(prevTower.getEnd(), updateTower.getEnd())){
                 prevTower.addCard(updateTower.getEnd());
+            }
+        }
+    }
+
+    private void checkBaseStacks(HashMap<Character, BaseStack> prev, HashMap<Character, BaseStack> update){
+
+        for (Map.Entry entry : update.entrySet()){
+            BaseStack stack = (BaseStack) entry.getValue();
+            char suit = stack.getSuit();
+
+            if(!prev.containsKey(suit)){
+                prev.put(suit, new BaseStack(stack.peek()));
+            }
+            else if (!cardsEqual(prev.get(suit).peek(), stack.peek())){
+                prev.get(suit).push(stack.peek());
             }
         }
     }
