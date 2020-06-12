@@ -34,7 +34,7 @@ public class Server {
 
     private static String runALG(SolitaireDTO dto) {
         SolitaireStateFactory stateFactory = new SolitaireStateFactory();
-        stateFactory.updateGame(dto);
+        stateFactory.updateGameFromDTO(dto);
         Solitaire game = stateFactory.getGame();
 
         StringBuilder stringBuilder = new StringBuilder(game.toString());

@@ -13,10 +13,19 @@ public class SolitaireStateFactory {
 
     private Solitaire game = null;
 
-    public void updateGame(SolitaireDTO DTO){
+    public void updateGameFromDTO(SolitaireDTO DTO){
 
         Solitaire game = create(DTO);
 
+        if (this.game == null){
+            setGame(game);
+        }
+        else{
+            setGame(changes(game));
+        }
+    }
+
+    public void updateGameFromGame(Solitaire game){
         if (this.game == null){
             setGame(game);
         }
