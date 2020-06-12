@@ -6,17 +6,25 @@ import DTO.SolitaireDTO;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public class SolitaireStateFactory {
 
     private Solitaire game = null;
 
     public void updateGame(SolitaireDTO DTO){
-        if (game == null){
-            game = create(DTO);
+
+        Solitaire game = new Solitaire();
+        game.setCurrentCard(dtoToCard(DTO.getCurrentCard()));
+        game.setBaseStackMap(dtoToBaseStackMap(DTO.getBaseStack()));
+        game.setTowerList(dtoToTowerList(DTO.getTowers()));
+
+        if (this.game == null){
+            this.game = game;
         }
         else{
-            game = changes(DTO);
+            this.game = changes(game);
         }
     }
 
@@ -27,8 +35,43 @@ public class SolitaireStateFactory {
         game.setTowerList(dtoToTowerList(solitaireDTO.getTowers()));
         return game;
     }
-    private Solitaire changes(SolitaireDTO DTO){
-        return null;
+
+    private Solitaire changes(Solitaire update){
+        Solitaire game = this.game;
+
+        if (!game.getCurrentCard().equals(update.getCurrentCard())){
+            game.setCurrentCard(update.getCurrentCard());
+        }
+
+        //https://stackoverflow.com/questions/15985266/how-to-iterate-through-two-arraylists-simultaneously
+
+        Iterator<BuildingTower> gameTowers = game.getTowerList().iterator();
+        Iterator<BuildingTower> updateTowers = update.getTowerList().iterator();
+
+        while (gameTowers.hasNext() && updateTowers.hasNext()){
+            BuildingTower tower = gameTowers.next();
+            BuildingTower tower1 = gameTowers.next();
+
+            if (!tower.getEnd().equals(tower1.getEnd())){
+                tower.addCard(tower1.getEnd());
+            }
+        }
+
+        for (Map.Entry entry : update.getBaseStackMap().entrySet()){
+            BaseStack stack = (BaseStack) entry.getValue();
+
+            if(!game.getBaseStackMap().containsKey(stack.getSuit())){
+                game.moveToBaseStack(stack.peek());
+            }
+            else if(game.getBaseStackMap().containsKey(stack.getSuit())){
+                if(!game.getBaseStackMap().get(stack.getSuit()).peek().equals(stack.peek())){
+                    game.moveToBaseStack(stack.peek());
+                }
+            }
+        }
+
+
+        return game;
     }
 
     public Solitaire getGame() {
