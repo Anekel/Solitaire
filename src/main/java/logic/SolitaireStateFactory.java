@@ -49,7 +49,8 @@ public class SolitaireStateFactory {
     }
 
     private boolean cardsEqual(Card prev, Card update){
-        return prev.equals(update);
+        if(prev == null) return false;
+        else return prev.equals(update);
     }
 
     private void checkTowers(ArrayList<BuildingTower> prev, ArrayList<BuildingTower> update){
