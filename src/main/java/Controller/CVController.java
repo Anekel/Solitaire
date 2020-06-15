@@ -9,7 +9,7 @@ import socket.ClientSocket;
 import java.io.*;
 import java.util.ArrayList;
 
-public class Server {
+public class CVController {
 
     private static SolitaireStateFactory stateFactory = new SolitaireStateFactory();
 
