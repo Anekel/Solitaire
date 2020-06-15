@@ -9,7 +9,7 @@ public class Algorithm {
 
     static ArrayList<Card> movedKings;
 
-    public static ReturnData ALG(Solitaire game, ArrayList<Card> kings) {
+    public static boolean ALG(Solitaire game, ArrayList<Card> kings) {
 
         movedKings = kings;
 
@@ -20,7 +20,7 @@ public class Algorithm {
             if(move){
                 game.moveToBaseStack(card);
                 game.setCurrentCard(null);
-                return new ReturnData(false, movedKings);
+                return false;
             }
         }
 
@@ -36,7 +36,7 @@ public class Algorithm {
             if(move){
                 game.removeFromTower(tower, end);
                 game.moveToBaseStack(end);
-                return new ReturnData(false, movedKings);
+                return false;
             }
         }
 
@@ -53,7 +53,7 @@ public class Algorithm {
                 if (move){
                     game.removeFromTower(tower, head);
                     game.moveToTower(crossTower, head);
-                    return new ReturnData(false, movedKings);
+                    return false;
                 }
             }
         }
@@ -67,11 +67,11 @@ public class Algorithm {
                 if (move){
                     game.moveToTower(tower, card);
                     game.setCurrentCard(null);
-                    return new ReturnData(false, movedKings);
+                    return false;
                 }
             }
         }
-        return new ReturnData(true, movedKings);
+        return true;
     }
 
     private static boolean towerCheck(Card card, BuildingTower tower){

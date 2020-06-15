@@ -12,7 +12,6 @@ import java.util.Scanner;
 
 public class SimulationController {
 
-    private static ArrayList<Card> movedKings = new ArrayList<>();
     private static SolitaireStateFactory stateFactory = new SolitaireStateFactory();
     private static Deck deck = new Deck();
 
@@ -28,9 +27,8 @@ public class SimulationController {
             while (!noMoves){
                 Solitaire game = stateFactory.getGame();
 
-                ReturnData returnData = Algorithm.ALG(game, movedKings);
-                noMoves = returnData.isNoMoves();
-                movedKings = returnData.getMovedKings();
+                noMoves = Algorithm.ALG(stateFactory.getGame(), stateFactory.getMovedKings());
+
                 System.out.println(game.toString());
                 if(noMoves) continue;
 
