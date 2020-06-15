@@ -22,10 +22,11 @@ public class CVController {
 
             String data = clientSocket.readData();
 
-            Gson gson = new Gson();
-            SolitaireDTO gameDTO = gson.fromJson(data, SolitaireDTO.class);
-
-            stateFactory.updateGameFromDTO(gameDTO);
+            if (!data.equals("Skip")){
+                Gson gson = new Gson();
+                SolitaireDTO gameDTO = gson.fromJson(data, SolitaireDTO.class);
+                stateFactory.updateGameFromDTO(gameDTO);
+            }
 
             String str = runALG(stateFactory.getGame(), stateFactory.getMovedKings());
 
