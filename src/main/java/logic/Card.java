@@ -48,6 +48,10 @@ public class Card {
         return value == 13;
     }
 
+    public boolean equals(Card card){
+        return this.suit == card.getSuit() && this.value == card.getValue();
+    }
+
     // ToStrings
     public String toString(){
 
