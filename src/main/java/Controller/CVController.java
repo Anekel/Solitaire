@@ -44,10 +44,10 @@ public class CVController {
             stringBuilder.append(game.toString());
         }
         else {
-            stringBuilder.append("Draw card!");
+            stringBuilder.append("Draw card!\n");
         }
 
-        System.out.print(stringBuilder.toString());
+        System.out.println(stringBuilder.toString());
 
         return stringBuilder.toString();
     }

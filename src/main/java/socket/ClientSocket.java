@@ -13,22 +13,22 @@ public class ClientSocket {
 
     public ClientSocket(int port) throws IOException {
         server = new ServerSocket(port);
-        System.out.println("Server started\n\n");
+        System.out.println("Server started\n");
     }
 
     public String readData() throws IOException {
         Socket client = server.accept();
-        System.out.println("Client accepted\n");
+        System.out.println("Client accepted");
 
         BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));
         StringBuilder sb = new StringBuilder();
-        System.out.println("Reading data\n");
+        System.out.println("Reading data");
         String line;
         while ((line = in.readLine()) != null) {
             sb.append(line);
         }
 
-        System.out.println("Received: " + sb.toString() + "\n\n");
+        System.out.println("Received: " + sb.toString() + "\n");
         client.close();
 
         return sb.toString();
@@ -36,7 +36,7 @@ public class ClientSocket {
 
     public void sendData(String string) throws IOException {
         Socket client = server.accept();
-        System.out.println("Client accepted\n");
+        System.out.println("\nClient accepted");
         PrintWriter out = new PrintWriter(client.getOutputStream(),true);
         out.println(string);
         System.out.println("Data sent\n\n");
