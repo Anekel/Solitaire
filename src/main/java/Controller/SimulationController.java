@@ -1,13 +1,10 @@
 package Controller;
 
 import algorithm.Algorithm;
-import algorithm.ReturnData;
-import logic.Card;
 import logic.Deck;
 import logic.Solitaire;
 import logic.SolitaireStateFactory;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class SimulationController {

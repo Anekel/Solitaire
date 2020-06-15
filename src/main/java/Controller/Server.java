@@ -1,9 +1,10 @@
-package socket;
+package Controller;
 
 import DTO.*;
 import algorithm.*;
 import logic.*;
 import com.google.gson.Gson;
+import socket.ClientSocket;
 
 import java.io.*;
 import java.util.ArrayList;
