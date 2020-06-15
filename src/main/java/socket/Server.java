@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class Server {
 
-    private static ArrayList<Card> movedKings = new ArrayList<>();
+    private static SolitaireStateFactory stateFactory = new SolitaireStateFactory();
 
     public static void main(String[] args) throws IOException {
 
@@ -24,7 +24,9 @@ public class Server {
             Gson gson = new Gson();
             SolitaireDTO gameDTO = gson.fromJson(data, SolitaireDTO.class);
 
-            String str = runALG(gameDTO);
+            stateFactory.updateGameFromDTO(gameDTO);
+
+            String str = runALG(stateFactory.getGame(), stateFactory.getMovedKings());
 
             clientSocket.sendData(str);
         }
@@ -32,20 +34,12 @@ public class Server {
         System.exit(0);
     }
 
-    private static String runALG(SolitaireDTO dto) {
-        SolitaireStateFactory stateFactory = new SolitaireStateFactory();
-        stateFactory.updateGameFromDTO(dto);
-        Solitaire game = stateFactory.getGame();
+    private static String runALG(Solitaire game, ArrayList<Card> movedKings) {
 
         StringBuilder stringBuilder = new StringBuilder(game.toString());
         stringBuilder.append("\n");
 
-        ReturnData returnData = Algorithm.ALG(game, movedKings);
-        movedKings = returnData.getMovedKings();
-
-        stateFactory.setGame(game);
-
-        if (!returnData.isNoMoves()){
+        if (!Algorithm.ALG(game, movedKings)){
             stringBuilder.append(game.toString());
         }
         else {
