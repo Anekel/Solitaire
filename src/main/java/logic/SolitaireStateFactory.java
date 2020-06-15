@@ -115,10 +115,10 @@ public class SolitaireStateFactory {
         return game;
     }
 
-    private HashMap<Character, BaseStack> dtoToBaseStackMap(HashMap<Character, CardDTO> baseStackDTO){
+    private HashMap<Character, BaseStack> dtoToBaseStackMap(ArrayList<CardDTO> baseStackDTO){
         HashMap<Character, BaseStack> baseStackMap = new HashMap<>();
 
-        for (CardDTO cardDTO : baseStackDTO.values()){
+        for (CardDTO cardDTO : baseStackDTO){
             baseStackMap.put(cardDTO.getSuit(), new BaseStack(dtoToCard(cardDTO)));
         }
         return baseStackMap;

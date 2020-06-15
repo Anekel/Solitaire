@@ -1,5 +1,7 @@
 package DTO;
 
+import logic.Card;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,7 +11,7 @@ public class SolitaireDTO implements Serializable {
 
     private CardDTO currentCard;
     private ArrayList<BuildingTowerDTO> towers = new ArrayList<>();
-    private HashMap<Character, CardDTO> baseStack;
+    private ArrayList<CardDTO> baseStack;
 
     public SolitaireDTO() {
         for (int i = 0; i < 7; i++){
@@ -25,11 +27,11 @@ public class SolitaireDTO implements Serializable {
         this.currentCard = currentCard;
     }
 
-    public HashMap<Character, CardDTO> getBaseStack() {
+    public ArrayList<CardDTO> getBaseStack() {
         return baseStack;
     }
 
-    public void setBaseStack(HashMap<Character, CardDTO> baseStack) {
+    public void setBaseStack(ArrayList<CardDTO> baseStack) {
         this.baseStack = baseStack;
     }
 
