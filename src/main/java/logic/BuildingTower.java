@@ -24,7 +24,7 @@ public class BuildingTower {
         }
     }
 
-    public Card removeCard(Card card){
+    public void removeCard(Card card){
         if (card.equals(head)){
 
             // For hinting
@@ -39,7 +39,6 @@ public class BuildingTower {
             setEnd(card.prevCard);
             card.prevCard = null;
         }
-        return card;
     }
 
     public void pushFaceDown(Card card){

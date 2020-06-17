@@ -58,7 +58,6 @@ public class Algorithm {
             }
         }
 
-        card = game.getCurrentCard();
         if(card != null){
 
             for(BuildingTower tower : game.getTowerList()){
