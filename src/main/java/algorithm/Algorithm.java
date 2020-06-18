@@ -7,11 +7,7 @@ import java.util.HashMap;
 
 public class Algorithm {
 
-    static ArrayList<Card> movedKings;
-
-    public static boolean ALG(Solitaire game, ArrayList<Card> kings) {
-
-        movedKings = kings;
+    public static boolean ALG(Solitaire game) {
 
         Card card = game.getCurrentCard();
         if(card != null){

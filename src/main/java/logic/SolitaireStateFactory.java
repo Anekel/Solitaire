@@ -12,7 +12,6 @@ import java.util.Map;
 public class SolitaireStateFactory {
 
     private Solitaire game = null;
-    private ArrayList<Card> movedKings = new ArrayList<>();
 
     public void updateGameFromDTO(SolitaireDTO DTO){
         if(this.game == null) game = new Solitaire(7);
@@ -84,14 +83,6 @@ public class SolitaireStateFactory {
 
     public void setGame(Solitaire game) {
         this.game = game;
-    }
-
-    public ArrayList<Card> getMovedKings() {
-        return movedKings;
-    }
-
-    public void setMovedKings(ArrayList<Card> movedKings) {
-        this.movedKings = movedKings;
     }
 
     private Card dtoToCard(CardDTO cardDTO){

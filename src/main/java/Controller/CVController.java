@@ -28,7 +28,7 @@ public class CVController {
                 stateFactory.updateGameFromDTO(gameDTO);
             }
 
-            String str = runALG(stateFactory.getGame(), stateFactory.getMovedKings());
+            String str = runALG(stateFactory.getGame());
 
             clientSocket.sendData(str);
         }
@@ -36,12 +36,12 @@ public class CVController {
         System.exit(0);
     }
 
-    private static String runALG(Solitaire game, ArrayList<Card> movedKings) {
+    private static String runALG(Solitaire game) {
 
         StringBuilder stringBuilder = new StringBuilder(game.toString());
         stringBuilder.append("\n");
 
-        if (!Algorithm.ALG(game, movedKings)){
+        if (!Algorithm.ALG(game)){
             stringBuilder.append(game.toString());
         }
         else {
