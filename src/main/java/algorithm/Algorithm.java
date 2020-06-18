@@ -44,9 +44,10 @@ public class Algorithm {
             // check if tower is empty
             if(tower.isEmpty()) continue;
 
-            //check if head can be moved to another tower
             Card head = tower.getHead();
+            if(head.isKing() && tower.getFaceDown().isEmpty()) continue;
 
+            //check if head can be moved to another tower
             for(BuildingTower crossTower : game.getTowerList()){
 
                 boolean move = towerCheck(head, crossTower);
@@ -76,13 +77,7 @@ public class Algorithm {
     private static boolean towerCheck(Card card, BuildingTower tower){
 
         // check if tower is empty
-        if(tower.isEmpty()){
-            if (card.isKing() && !movedKings.contains(card)) {
-                movedKings.add(card);
-                return true;
-            }
-            else return false;
-        }
+        if(tower.isEmpty()) return card.isKing();
 
         //check if card can be moved to tower
         boolean valuesMatch = tower.getEnd().getValue() - 1 == card.getValue();

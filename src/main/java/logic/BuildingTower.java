@@ -51,8 +51,8 @@ public class BuildingTower {
     }
 
     // Getters and Setters
-    public int getFaceDown() {
-        return faceDown.size();
+    public Stack<Card> getFaceDown() {
+        return faceDown;
     }
 
     public Card getHead() {
