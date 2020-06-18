@@ -139,6 +139,14 @@ public class SolitaireStateFactory {
             }
             towerList.add(buildingTower);
         }
+
+        int length = towerList.size();
+
+        for (int i = 1 ; i < length; i++){
+            BuildingTower tower = towerList.remove(i);
+            towerList.add(0, tower);
+        }
+
         return towerList;
     }
 
