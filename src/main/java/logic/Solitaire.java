@@ -27,21 +27,15 @@ public class Solitaire {
                 towerList.get(j).pushFaceDown(deck.draw());
             }
         }
-        int length = towerList.size();
-
-        for (int i = 1 ; i < length; i++){
-            BuildingTower tower = towerList.remove(i);
-            towerList.add(0, tower);
-        }
     }
 
     public Solitaire(){}
 
     public Solitaire(int towers){
-        for(int i = towers; i > 0; i--){
+        for(int i = 0; i < towers; i++){
             BuildingTower bt = new BuildingTower();
 
-            for (int j = i-1; j > 0; j--){
+            for (int j = i; j > 0; j--){
                 bt.pushFaceDown(new Card('0', 0));
             }
 
