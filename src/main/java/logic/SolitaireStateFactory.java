@@ -11,19 +11,13 @@ import java.util.Map;
 
 public class SolitaireStateFactory {
 
-    private Solitaire game = null;
+    private Solitaire game = new Solitaire(7);
     private ArrayList<Card> movedKings = new ArrayList<>();
 
     public void updateGameFromDTO(SolitaireDTO DTO){
 
         Solitaire game = create(DTO);
-
-        if (this.game == null){
-            setGame(game);
-        }
-        else{
-            setGame(changes(game));
-        }
+        setGame(changes(game));
     }
 
     public void updateGameFromGame(Solitaire game){
