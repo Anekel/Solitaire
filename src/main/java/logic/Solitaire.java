@@ -37,6 +37,18 @@ public class Solitaire {
 
     public Solitaire(){}
 
+    public Solitaire(int towers){
+        for(int i = towers; i > 0; i--){
+            BuildingTower bt = new BuildingTower();
+
+            for (int j = i-1; j > 0; j--){
+                bt.pushFaceDown(new Card('0', 0));
+            }
+
+            towerList.add(bt);
+        }
+    }
+
    public void removeFromTower(BuildingTower tower, Card card) {
         tower.removeCard(card);
     }
