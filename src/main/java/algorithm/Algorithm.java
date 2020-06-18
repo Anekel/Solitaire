@@ -9,6 +9,8 @@ public class Algorithm {
 
     public static boolean ALG(Solitaire game) {
 
+        int size = game.getTowerList().size();
+
         Card card = game.getCurrentCard();
         if(card != null){
 
@@ -20,7 +22,9 @@ public class Algorithm {
             }
         }
 
-        for(BuildingTower tower : game.getTowerList()){
+        for (int i = size-1; i >= 0; i--){
+            BuildingTower tower = game.getTowerList().get(i);
+
             // check if tower is empty
             if(tower.isEmpty()) continue;
 
@@ -36,7 +40,9 @@ public class Algorithm {
             }
         }
 
-        for(BuildingTower tower : game.getTowerList()){
+        for (int i = size-1; i >= 0; i--){
+            BuildingTower tower = game.getTowerList().get(i);
+
             // check if tower is empty
             if(tower.isEmpty()) continue;
 
