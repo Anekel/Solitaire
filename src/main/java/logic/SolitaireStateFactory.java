@@ -67,7 +67,7 @@ public class SolitaireStateFactory {
 
         for (Map.Entry entry : update.entrySet()){
             BaseStack stack = (BaseStack) entry.getValue();
-            char suit = stack.getSuit();
+            char suit = (Character) entry.getKey();
 
             if(!prev.containsKey(suit)){
                 prev.put(suit, new BaseStack(stack.peek()));
