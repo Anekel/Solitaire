@@ -25,7 +25,7 @@ public class BuildingTower {
     }
 
     public void removeCard(Card card){
-        if (card.equals(head)){
+        if (card == head){
 
             // For hinting
             setHead(null);
