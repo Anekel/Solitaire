@@ -7,6 +7,10 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+
+/**
+ * @author Siff & Hella
+ */
 public class ClientSocket {
 
     ServerSocket server;
