@@ -7,7 +7,7 @@ import java.util.HashMap;
 
 public class Algorithm {
 
-    public static boolean ALG(Solitaire game) {
+    public static boolean run(Solitaire game) {
 
         int size = game.getTowerList().size();
 
@@ -47,6 +47,7 @@ public class Algorithm {
             if(tower.isEmpty()) continue;
 
             Card head = tower.getHead();
+            // check if none-movable king
             if(head.isKing() && tower.getFaceDown().isEmpty()) continue;
 
             //check if head can be moved to another tower

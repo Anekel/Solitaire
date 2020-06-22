@@ -24,7 +24,7 @@ public class SimulationController {
             while (!noMoves){
                 Solitaire game = stateFactory.getGame();
 
-                noMoves = Algorithm.ALG(stateFactory.getGame());
+                noMoves = Algorithm.run(stateFactory.getGame());
 
                 System.out.println(game.toString());
                 if(noMoves) continue;

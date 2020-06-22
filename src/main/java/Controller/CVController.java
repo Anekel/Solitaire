@@ -7,7 +7,6 @@ import com.google.gson.Gson;
 import socket.ClientSocket;
 
 import java.io.*;
-import java.util.ArrayList;
 
 public class CVController {
 
@@ -41,7 +40,7 @@ public class CVController {
         StringBuilder stringBuilder = new StringBuilder(game.toString());
         stringBuilder.append("\n");
 
-        if (!Algorithm.ALG(game)){
+        if (!Algorithm.run(game)){
             stringBuilder.append(game.toString());
         }
         else {
