@@ -1,22 +1,23 @@
 package logic;
 
-import DTO.BuildingTowerDTO;
-import DTO.CardDTO;
-import DTO.SolitaireDTO;
+import DTO.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+/**
+ * @author Siff
+ */
 public class SolitaireStateFactory {
 
     private Solitaire game = null;
 
     public void updateGameFromDTO(SolitaireDTO DTO){
         if(this.game == null) game = new Solitaire(7);
-        Solitaire game = create(DTO);
-        setGame(changes(game));
+        Solitaire game = dtoToSolitaire(DTO);
+        setGame(updateChanges(game));
     }
 
     public void updateGameFromGame(Solitaire game){
@@ -24,20 +25,21 @@ public class SolitaireStateFactory {
             setGame(game);
         }
         else{
-            setGame(changes(game));
+            setGame(updateChanges(game));
         }
     }
 
-    private Solitaire changes(Solitaire update){
+    // Methods to apply changes to game
+    private Solitaire updateChanges(Solitaire update){
         Solitaire game = getGame();
 
         if (!cardsEqual(game.getCurrentCard(), update.getCurrentCard())){
             game.setCurrentCard(update.getCurrentCard());
         }
 
-        checkTowers(game.getTowerList(), update.getTowerList());
+        updateTowers(game.getTowerList(), update.getTowerList());
 
-        checkBaseStacks(game.getBaseStackMap(), update.getBaseStackMap());
+        updateBaseStacks(game.getBaseStackMap(), update.getBaseStackMap());
 
         return game;
     }
@@ -47,7 +49,7 @@ public class SolitaireStateFactory {
         return prev.equals(update);
     }
 
-    private void checkTowers(ArrayList<BuildingTower> prev, ArrayList<BuildingTower> update){
+    private void updateTowers(ArrayList<BuildingTower> prev, ArrayList<BuildingTower> update){
         //https://stackoverflow.com/questions/15985266/how-to-iterate-through-two-arraylists-simultaneously
         Iterator<BuildingTower> prevIt = prev.iterator();
         Iterator<BuildingTower> updateIt = update.iterator();
@@ -62,7 +64,7 @@ public class SolitaireStateFactory {
         }
     }
 
-    private void checkBaseStacks(HashMap<Character, BaseStack> prev, HashMap<Character, BaseStack> update){
+    private void updateBaseStacks(HashMap<Character, BaseStack> prev, HashMap<Character, BaseStack> update){
 
         for (Map.Entry entry : update.entrySet()){
             BaseStack stack = (BaseStack) entry.getValue();
@@ -77,6 +79,7 @@ public class SolitaireStateFactory {
         }
     }
 
+    // Getters and Setters
     public Solitaire getGame() {
         return game;
     }
@@ -85,19 +88,20 @@ public class SolitaireStateFactory {
         this.game = game;
     }
 
-    private Card dtoToCard(CardDTO cardDTO){
-        if(cardDTO == null) return null;
-        else{
-            return new Card(cardDTO.getSuit(), cardDTO.getValue());
-        }
-    }
-
-    private Solitaire create(SolitaireDTO solitaireDTO){
+    // Method to initialize Solitaire form DTOs
+    private Solitaire dtoToSolitaire(SolitaireDTO solitaireDTO){
         Solitaire game = new Solitaire();
         game.setCurrentCard(dtoToCard(solitaireDTO.getCurrentCard()));
         game.setBaseStackMap(dtoToBaseStackMap(solitaireDTO.getBaseStack()));
         game.setTowerList(dtoToTowerList(solitaireDTO.getTowers()));
         return game;
+    }
+
+    private Card dtoToCard(CardDTO cardDTO){
+        if(cardDTO == null) return null;
+        else{
+            return new Card(cardDTO.getSuit(), cardDTO.getValue());
+        }
     }
 
     private HashMap<Character, BaseStack> dtoToBaseStackMap(ArrayList<CardDTO> baseStackDTO){
@@ -114,10 +118,6 @@ public class SolitaireStateFactory {
 
         for (BuildingTowerDTO tower: towers) {
             BuildingTower buildingTower = new BuildingTower();
-
-            if (tower.isFaceDownCards()) {
-                buildingTower.pushFaceDown(new Card('X', 0));
-            }
 
             for (CardDTO card : tower.getFaceUpCards()) {
                 buildingTower.addCard(dtoToCard(card));
