@@ -15,10 +15,13 @@ public class Solitaire {
     private Card currentCard;
 
     public Solitaire(Deck deck){
+        // Instantiate BuildingTowers
         int towers = 7;
         for(int i = 0; i < towers; i++){
             towerList.add(new BuildingTower());
         }
+
+        // Setup cards
         int n = 0;
         for(int i = n; i < towers; i++){
             towerList.get(i).setHead(deck.draw());
@@ -44,6 +47,7 @@ public class Solitaire {
     }
 
    public void removeFromTower(BuildingTower tower, Card card) {
+       //Remove one or more cards from the tower.
         tower.removeCard(card);
     }
 

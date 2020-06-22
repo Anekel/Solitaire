@@ -31,7 +31,7 @@ public class BuildingTower {
             setHead(null);
             if (!faceDown.isEmpty()) faceDown.pop();
 //
-//            // For simulation (state pattern solution?)
+//            // For simulation
 //            if (faceDown.size() > 0) setHead(faceDown.pop());
 //            else setHead(null);
         }
