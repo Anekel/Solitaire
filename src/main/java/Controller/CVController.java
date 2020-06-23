@@ -8,6 +8,9 @@ import socket.ClientSocket;
 
 import java.io.*;
 
+/**
+ * @author Siff
+ */
 public class CVController {
 
     private static SolitaireStateFactory stateFactory = new SolitaireStateFactory();

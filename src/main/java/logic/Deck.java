@@ -3,6 +3,9 @@ package logic;
 import java.util.Collections;
 import java.util.Stack;
 
+/**
+ * @author Siff
+ */
 public class Deck {
     Stack<Card> faceDown = new Stack<>();
     Stack<Card> discard = new Stack<>();

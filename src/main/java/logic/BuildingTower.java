@@ -1,8 +1,10 @@
 package logic;
 
-import java.util.ArrayList;
 import java.util.Stack;
 
+/**
+ * @author Siff
+ */
 public class BuildingTower {
     private Stack<Card> faceDown = new Stack<Card>();
     private Card head;
