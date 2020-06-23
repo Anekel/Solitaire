@@ -10,9 +10,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Solitaire {
+
     private ArrayList<BuildingTower> towerList = new ArrayList<>();
     private HashMap<Character, BaseStack> baseStackMap = new HashMap<>();
     private Card currentCard;
+    private int nonMovableDraws = 0;
 
     public Solitaire(Deck deck){
         // Instantiate BuildingTowers
@@ -88,6 +90,18 @@ public class Solitaire {
 
     public void setCurrentCard(Card card) {
         this.currentCard = card;
+    }
+
+    public int getNonMovableDraws() {
+        return nonMovableDraws;
+    }
+
+    public void incrementNonMovableDraws() {
+        nonMovableDraws++;
+    }
+
+    public void resetNonMovableDraws() {
+        nonMovableDraws = 0;
     }
 
     public String toString(){

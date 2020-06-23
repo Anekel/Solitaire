@@ -33,11 +33,12 @@ public class Deck {
         return faceDown.isEmpty() && discard.isEmpty();
     }
 
-    public void shuffle(){
+    public Deck shuffle(){
         if (faceDown.isEmpty()){
             flipDiscard();
         }
         Collections.shuffle(faceDown);
+        return this;
     }
 
     private void flipDiscard(){
