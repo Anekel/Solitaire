@@ -3,33 +3,42 @@ package Controller;
 import algorithm.Algorithm;
 import logic.*;
 
+import java.util.Arrays;
+
 public class AutoSim {
 
     private static Deck deck;
     private static Solitaire game;
-    int[][] gamesWon;
-    int[][] gamesLost;
+    static int[] gamesWon;
+    static int[] gamesLost;
 
     public static void main(String[] args) {
 
-        int set = 1;
-        int rep = 10;
+        int set = 10;
+        int rep = 10000;
+
+        gamesWon = new int[set];
+        gamesLost = new int[set];
 
 
         for (int i = 0; i < set; i++){
-            run(rep);
+            run(i, rep);
         }
 
+        System.out.println("\n\n************************************************");
+        System.out.println("W: " + Arrays.toString(gamesWon));
+        System.out.println("L: " + Arrays.toString(gamesLost));
+        System.out.println("************************************************");
 
     }
 
-    private static void run(int x){
+    private static void run(int set, int rep){
 
-        int gamesWon = 0;
-        int gamesLost = 0;
+        int win = 0;
+        int lose = 0;
 
         // Num of reps
-        for(int i = 0; i < x; i++){
+        for(int i = 0; i < rep; i++){
 
             deck = new Deck().shuffle();
             game = new Solitaire(deck);
@@ -49,6 +58,7 @@ public class AutoSim {
                     if (isGameWon()) break;
 
                 }
+                if (isGameWon()) break;
 
                 if (game.getCurrentCard() != null){
                     deck.discard(game.getCurrentCard());
@@ -60,13 +70,16 @@ public class AutoSim {
                 game.setCurrentCard(deck.draw());
                 System.out.println(game.toString());
             }
-            if (isGameWon()) gamesWon++;
-            else gamesLost ++;
+            if (isGameWon()) win++;
+            else lose ++;
             System.out.println("----------------------------------------------");
         }
 
-        System.out.println("W: " + gamesWon);
-        System.out.println("L: " + gamesLost);
+        gamesWon[set] = win;
+        gamesLost[set] = lose;
+
+        System.out.println("W: " + win);
+        System.out.println("L: " + lose);
     }
 
     private static boolean isGameOver(){
