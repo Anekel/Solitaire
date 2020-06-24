@@ -1,5 +1,8 @@
 package logic;
 
+/**
+ * @author Siff
+ */
 public class Card {
     private char suit;
     private boolean red;

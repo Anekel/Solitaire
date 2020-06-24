@@ -2,12 +2,16 @@ package DTO;
 
 import java.io.Serializable;
 
+/**
+ * @author Siff
+ */
 public class CardDTO implements Serializable {
 
     private char suit;
     private int value;
 
     public CardDTO(){ }
+
     public CardDTO(char suit, int value){
         this.suit = suit;
         this.value = value;

@@ -1,12 +1,13 @@
 package Controller;
 
 import algorithm.Algorithm;
-import logic.Deck;
-import logic.Solitaire;
-import logic.SolitaireStateFactory;
+import logic.*;
 
 import java.util.Scanner;
 
+/**
+ * @author Siff
+ */
 public class SimulationController {
 
     private static SolitaireStateFactory stateFactory = new SolitaireStateFactory();

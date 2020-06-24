@@ -1,10 +1,11 @@
 package DTO;
 
-import logic.BuildingTower;
-
 import java.io.Serializable;
 import java.util.LinkedList;
 
+/**
+ * @author Siff
+ */
 public class BuildingTowerDTO implements Serializable {
 
     private boolean faceDownCards;

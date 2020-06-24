@@ -1,12 +1,11 @@
 package DTO;
 
-import logic.Card;
-
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
 
+/**
+ * @author Siff
+ */
 public class SolitaireDTO implements Serializable {
 
     private CardDTO currentCard;

@@ -2,6 +2,9 @@ package logic;
 
 import java.util.Stack;
 
+/**
+ * @author Siff
+ */
 public class BaseStack {
     private Stack<Card> cards = new Stack<>();
 

@@ -1,14 +1,12 @@
 package logic;
 
-import DTO.BuildingTowerDTO;
-import DTO.CardDTO;
-import DTO.SolitaireDTO;
-
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author Siff
+ */
 public class Solitaire {
 
     private ArrayList<BuildingTower> towerList = new ArrayList<>();
@@ -37,9 +35,11 @@ public class Solitaire {
     public Solitaire(){}
 
     public Solitaire(int towers){
+        // Instantiate BuildingTowers
         for(int i = 0; i < towers; i++){
             BuildingTower bt = new BuildingTower();
 
+            // Generate dummy Cards
             for (int j = i; j > 0; j--){
                 bt.pushFaceDown(new Card('0', 0));
             }

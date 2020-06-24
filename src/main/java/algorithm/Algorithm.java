@@ -1,19 +1,20 @@
 package algorithm;
 
 import logic.*;
-
-import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+* @author Siff
+*/
 public class Algorithm {
 
     public static boolean run(Solitaire game) {
 
         int size = game.getTowerList().size();
-
         Card card = game.getCurrentCard();
-        if(card != null){
 
+        // Check if the current card can be moved to a BaseStack
+        if(card != null){
             boolean move = baseStackCheck(card, game.getBaseStackMap());
             if(move){
                 game.moveToBaseStack(card);
@@ -22,17 +23,16 @@ public class Algorithm {
             }
         }
 
+        // Check if the last card in a tower can be moved to a BaseStack
         for (int i = size-1; i >= 0; i--){
             BuildingTower tower = game.getTowerList().get(i);
 
-            // check if tower is empty
+            // Check if tower is empty
             if(tower.isEmpty()) continue;
-
-            // check if End can be moved BaseStack
             Card end = tower.getEnd();
 
+            // Check if End can be moved BaseStack
             boolean move = baseStackCheck(end, game.getBaseStackMap());
-
             if(move){
                 game.removeFromTower(tower, end);
                 game.moveToBaseStack(end);
@@ -40,17 +40,18 @@ public class Algorithm {
             }
         }
 
+        // Check if the first card in a tower can be moved to another tower
         for (int i = size-1; i >= 0; i--){
             BuildingTower tower = game.getTowerList().get(i);
 
-            // check if tower is empty
+            // Check if tower is empty
             if(tower.isEmpty()) continue;
-
             Card head = tower.getHead();
-            // check if none-movable king
+
+            // Check if none-movable king
             if(head.isKing() && tower.getFaceDown().isEmpty()) continue;
 
-            //check if head can be moved to another tower
+            // Check if head can be moved to another tower
             for(BuildingTower crossTower : game.getTowerList()){
 
                 boolean move = towerCheck(head, crossTower);
@@ -62,6 +63,7 @@ public class Algorithm {
             }
         }
 
+        // Check if the current card can be moved to a tower
         if(card != null){
 
             for(BuildingTower tower : game.getTowerList()){
@@ -79,10 +81,10 @@ public class Algorithm {
 
     private static boolean towerCheck(Card card, BuildingTower tower){
 
-        // check if tower is empty
+        // Check if tower is empty
         if(tower.isEmpty()) return card.isKing();
 
-        //check if card can be moved to tower
+        // Check if cards match
         boolean valuesMatch = tower.getEnd().getValue() - 1 == card.getValue();
         boolean suitsMatch = tower.getEnd().isRed() != card.isRed();
 
@@ -90,7 +92,10 @@ public class Algorithm {
     }
 
     private static boolean baseStackCheck(Card card, HashMap<Character, BaseStack> baseStackMap){
+        // Check if card is ace
         if (card.getValue() == 1) return true;
+
+        // Check if baseStackMap contains the suit
         else if(baseStackMap.containsKey(card.getSuit())){
             Card top = baseStackMap.get(card.getSuit()).peek();
             return top.getValue() + 1 == card.getValue();
