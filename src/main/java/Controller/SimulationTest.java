@@ -5,7 +5,10 @@ import logic.*;
 
 import java.util.Arrays;
 
-public class AutoSim {
+/**
+ * @author Siff
+ */
+public class SimulationTest {
 
     private static Deck deck;
     private static Solitaire game;
